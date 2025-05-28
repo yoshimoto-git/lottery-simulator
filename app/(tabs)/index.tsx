@@ -9,10 +9,16 @@ export default function HomeScreen() {
   const [numbers, setNumbers] = useState<number[]>([]);
 
   const drawLottery = () => {
-    const generated = Array.from(new Set(
-      Array(6).fill(0).map(() => Math.floor(Math.random() * 43) + 1)
-    ));
-    setNumbers(generated);
+    const generated = new Set<number>();
+  
+    while (generated.size < 6) {
+      const num = Math.floor(Math.random() * 43) + 1;
+      generated.add(num);
+    }
+  
+    const result = Array.from(generated);
+    setNumbers(result.sort((a, b) => a - b ));
+    console.log(result);
   };
 
   return (
